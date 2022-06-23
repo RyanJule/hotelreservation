@@ -31,6 +31,10 @@ public class CustomerService {
         return allCustomers.values();
     }
 
+    public static void printAllReservations() {
+        ReservationService.printAllReservations();
+    }
+
 
 }
 

@@ -69,7 +69,7 @@ public class ReservationService {
         return customerReservations;
     }
 
-    public static void printAllReservations() {
+    static void printAllReservations() {
         for (Reservation r : allReservations.keySet()) {
             System.out.println(r.toString());
         }
