@@ -7,7 +7,7 @@ import java.util.*;
 public class CustomerService {
 
     private static CustomerService singleInstance1 = new CustomerService();
-    public static Map<String, Customer> allCustomers;
+    public static Map<String, Customer> allCustomers = new HashMap<String, Customer>();
 
     private CustomerService() {
 

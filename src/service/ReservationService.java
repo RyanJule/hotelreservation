@@ -9,15 +9,13 @@ import java.util.*;
 
 public class ReservationService {
 
-    static ReservationService singleInstance = new ReservationService();
+    private static volatile ReservationService singleInstance = new ReservationService();
 
-    public static Map<String, IRoom> allRooms;
+    public static Map<String, IRoom> allRooms = new HashMap<String, IRoom>();
 
-    static Map<Reservation, Customer> allReservations;
+    static Map<Reservation, Customer> allReservations = new HashMap<Reservation, Customer>();
 
-    private ReservationService() {
-
-    }
+    private ReservationService() {}
 
     public static ReservationService getInstance() {
         return singleInstance;

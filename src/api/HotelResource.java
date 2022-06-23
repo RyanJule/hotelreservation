@@ -13,7 +13,7 @@ public class HotelResource {
 
     public static Map<String, Customer> allCustomers = customerService.allCustomers;
 
-    public static Map<String, IRoom> allRooms = ReservationService.allRooms;
+    public static Map<String, IRoom> allRooms = reservationService.allRooms;
 
     public Customer getCustomer(String email) {
         return customerService.getCustomer(email);
@@ -35,12 +35,15 @@ public class HotelResource {
         return reservationService.getCustomersReservation(customerService.getCustomer(customerEmail));
     }
 
-    public static int counter = 1;
+    public static int counter = 0;
     public static int token = 1;
-    public static void findARoom(Date checkIn, Date checkOut) {
+    public static Integer findARoom(Date checkIn, Date checkOut) {
         Map<String, IRoom> availRooms = reservationService.findRooms(checkIn, checkOut);
 
         if (availRooms.isEmpty()) {
+            if (token == 1) {
+            counter += 1;
+            }
             int value = counter * token;
             Calendar cIn = Calendar.getInstance();
             Calendar cOut = Calendar.getInstance();
@@ -50,20 +53,17 @@ public class HotelResource {
             cOut.add(Calendar.DATE, value);
             Date newCheckIn = cIn.getTime();
             Date newCheckOut = cOut.getTime();
-            if (token == -1) {
-                counter += 1;
-            }
+
             token *= -1;
             System.out.println("No rooms available. Searching closest dates for similar reservations");
             findARoom(newCheckIn, newCheckOut);
         }
         else {
             for (IRoom iRoom : availRooms.values()) {
-                System.out.print(iRoom.toString());
+                System.out.print(iRoom.toString() + "It will be available for these dates: " + checkIn.toString() + " " + checkOut.toString() + "\n");
             }
-            token = 1;
-            counter = 1;
         }
+        return counter;
     }
 
 

@@ -17,7 +17,7 @@ public class AdminResource {
 
     public static Map<String, Customer> allCustomers = customerService.allCustomers;
 
-    public static Map<String, IRoom> allRooms = reservationService.allRooms;
+    public static Map<String, IRoom> allRooms = ReservationService.allRooms;
 
     public Customer getCustomer(String email) {
         return customerService.getCustomer(email);
@@ -25,6 +25,7 @@ public class AdminResource {
 
     public static void addRoom(List<IRoom> rooms) {
         for (IRoom room : rooms) {
+            Map<String, IRoom> allRooms = reservationService.allRooms;
             if (allRooms.containsKey(room)) { System.out.println("Room " + room.getRoomNumber() +" already exists");}
             else{
                 reservationService.addRoom(room);

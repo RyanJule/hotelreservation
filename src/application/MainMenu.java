@@ -1,6 +1,7 @@
 package application;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
@@ -54,7 +55,20 @@ public class MainMenu {
                     }
 
                     if (checkInDate.before(checkOutDate)) {
-                        HotelResource.findARoom(checkInDate, checkOutDate);
+                        int DaysOff = HotelResource.findARoom(checkInDate, checkOutDate);
+                        Calendar cIn = Calendar.getInstance();
+                        Calendar cOut = Calendar.getInstance();
+                        cIn.setTime(checkInDate);
+                        cOut.setTime(checkOutDate);
+                        cIn.add(Calendar.DATE, HotelResource.counter);
+                        cOut.add(Calendar.DATE, HotelResource.counter);
+                        HotelResource.counter = 0;
+                        HotelResource.token = 1;
+                        Date availCheckIn = cIn.getTime();
+                        Date availCheckOut = cOut.getTime();
+                        checkInDate = availCheckIn;
+                        checkOutDate = availCheckOut;
+
                     }
 
                     else {
@@ -62,7 +76,7 @@ public class MainMenu {
                         initializeMainMenu();
                     }
 
-                    System.out.println("Would you like to book a room? y/n");
+                    System.out.println("Would you like to book a room on these dates? y/n");
 
                     String bookAnswer = sc.next();
                     String accountAnswer;
