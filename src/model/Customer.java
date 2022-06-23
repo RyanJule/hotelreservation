@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Customer {
-    String firstName;
-    String lastName;
-    String email;
+    public String firstName;
+    public String lastName;
+    public String email;
 
     public Customer(String firstName, String lastName, String email) {
         this.firstName = firstName;
